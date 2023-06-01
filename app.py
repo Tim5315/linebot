@@ -68,7 +68,8 @@ def callback():
 
         line_bot_api.reply_message(
             event.reply_token,
-            TextSendMessage(text=zh.read(event.message.text))
+            resout = zh.read(event.message.text)
+            TextSendMessage(text=resout)
         )
 
     return 'OK'
