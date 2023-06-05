@@ -65,11 +65,12 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
-        '''
+        
         line_bot_api.reply_message(
             event.reply_token,
             TextSendMessage(text=zh.read(event.message.text))
         )
+        
         '''
         image = 'https://yuruyuri.com/10th/img/pre/visual_2.png?3'
         line_bot_api.reply_message(
@@ -78,6 +79,7 @@ def callback():
                 original_content_url = image,
                 preview_image_url = image)
         )
+        '''
     return 'OK'
 
 
