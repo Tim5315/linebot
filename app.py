@@ -15,7 +15,7 @@
 
 import os
 import sys
-import Zhuyin as zh
+from musician import *
 from argparse import ArgumentParser
 
 from flask import Flask, request, abort
@@ -65,21 +65,16 @@ def callback():
             continue
         if not isinstance(event.message, TextMessage):
             continue
+            
+        message = []
+        a = getinfo(event.message.text)
+        message.append( TextSendMessage( text = '音樂家：' + event.message.text + '\n' ) )
+        message.append( TextSendMessage( text = a[0] + '\n' ) )
+        message.append( TextSendMessage( text = '最受矚目的作品：' + a[1] ) )
         
-        line_bot_api.reply_message(
-            event.reply_token,
-            TextSendMessage(text=zh.read(event.message.text))
-        )
+        line_bot_api.reply_message( event.reply_token, message )
         
-        '''
-        image = 'https://yuruyuri.com/10th/img/pre/visual_2.png?3'
-        line_bot_api.reply_message(
-            event.reply_token,
-            ImageSendMessage(
-                original_content_url = image,
-                preview_image_url = image)
-        )
-        '''
+        
     return 'OK'
 
 
